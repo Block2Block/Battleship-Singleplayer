@@ -1,4 +1,6 @@
 ﻿Public Class Form2
+    Dim letters() As Char = {"A"c, "B"c, "C"c, "D"c, "E"c, "F"c, "G"c, "H"c, "I"c, "J"c}
+    Dim ship As List(Of String) = {""}.ToList
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         My.Forms.Form1.Hide()
 
@@ -27,4 +29,81 @@
         My.Forms.Form1.Show()
         Me.Close()
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim number As Integer
+        Dim number2 As Integer
+        Randomize()
+        'this is where i cry because i need to make ai to choose spaces. :'(
+        number = Int(Rnd() * 10) + 1
+        number2 = Int(Rnd() * 9) + 1
+
+        Dim space As String = letters(number2) & number
+        Dim x As Integer
+        If checkRight(space) Then
+            Try
+                If Byte.Parse(space.ToCharArray()(2)) = "0" Then
+                    x = 10
+                Else
+                    x = Byte.Parse(space.ToCharArray()(1))
+                End If
+            Catch ex As Exception
+                x = Byte.Parse(space.ToCharArray()(1))
+            End Try
+
+            ship.Clear()
+
+            Dim y As Integer = 5
+
+            Do While y > 0
+                DirectCast(My.Forms.Form5.Controls.Find((space.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-"
+                ship.Add(space.ToCharArray()(0) & x.ToString)
+                y = y - 1
+                If y > 0 Then
+                    x = x + 1
+                End If
+            Loop
+        End If
+
+
+    End Sub
+
+    Private Function checkRight(ByVal space As String) As Boolean
+        Select Case space.ToCharArray()(1)
+            Case "1"c
+                Try
+                    If space.ToCharArray()(2) = "0"c Then
+                        Return False
+                    End If
+                Catch ex As Exception
+                End Try
+            Case "7"c
+                Return False
+            Case "8"c
+                Return False
+            Case "9"c
+                Return False
+        End Select
+        Dim x As Byte = 0
+        Dim y As Byte = 5
+
+        x = Array.IndexOf(letters, space.ToCharArray()(0))
+
+        Do While y > 0
+            Try
+                If DirectCast(My.Forms.Form5.Controls.Find((letters(x) & space.ToCharArray()(1)).ToString, True)(0), Button).Text = "-" Then
+                    Return False
+                    Exit Do
+                End If
+            Catch ex As Exception
+
+            End Try
+            y = y - 1
+            If x > 0 Then
+                x = x - 1
+            End If
+        Loop
+
+        Return True
+    End Function
 End Class

@@ -144,12 +144,12 @@ Partial Class Form2
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Carrier = New System.Windows.Forms.Label()
         Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Battleship = New System.Windows.Forms.Label()
+        Me.Cruises = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
-        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Destroyer = New System.Windows.Forms.Label()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -1154,14 +1154,14 @@ Partial Class Form2
         Me.Label22.TabIndex = 4
         Me.Label22.Text = "Carrier (5):"
         '
-        'Label23
+        'Carrier
         '
-        Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(172, 456)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(13, 13)
-        Me.Label23.TabIndex = 5
-        Me.Label23.Text = "1"
+        Me.Carrier.AutoSize = True
+        Me.Carrier.Location = New System.Drawing.Point(172, 456)
+        Me.Carrier.Name = "Carrier"
+        Me.Carrier.Size = New System.Drawing.Size(13, 13)
+        Me.Carrier.TabIndex = 5
+        Me.Carrier.Text = "1"
         '
         'Label24
         '
@@ -1172,23 +1172,23 @@ Partial Class Form2
         Me.Label24.TabIndex = 6
         Me.Label24.Text = "Battleship (4):"
         '
-        'Label25
+        'Battleship
         '
-        Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(300, 456)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(13, 13)
-        Me.Label25.TabIndex = 5
-        Me.Label25.Text = "1"
+        Me.Battleship.AutoSize = True
+        Me.Battleship.Location = New System.Drawing.Point(300, 456)
+        Me.Battleship.Name = "Battleship"
+        Me.Battleship.Size = New System.Drawing.Size(13, 13)
+        Me.Battleship.TabIndex = 5
+        Me.Battleship.Text = "1"
         '
-        'Label26
+        'Cruises
         '
-        Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(395, 456)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(13, 13)
-        Me.Label26.TabIndex = 5
-        Me.Label26.Text = "2"
+        Me.Cruises.AutoSize = True
+        Me.Cruises.Location = New System.Drawing.Point(395, 456)
+        Me.Cruises.Name = "Cruises"
+        Me.Cruises.Size = New System.Drawing.Size(13, 13)
+        Me.Cruises.TabIndex = 5
+        Me.Cruises.Text = "2"
         '
         'Label27
         '
@@ -1199,14 +1199,14 @@ Partial Class Form2
         Me.Label27.TabIndex = 6
         Me.Label27.Text = "Cruises (3):"
         '
-        'Label28
+        'Destroyer
         '
-        Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(500, 456)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(13, 13)
-        Me.Label28.TabIndex = 5
-        Me.Label28.Text = "1"
+        Me.Destroyer.AutoSize = True
+        Me.Destroyer.Location = New System.Drawing.Point(500, 456)
+        Me.Destroyer.Name = "Destroyer"
+        Me.Destroyer.Size = New System.Drawing.Size(13, 13)
+        Me.Destroyer.TabIndex = 5
+        Me.Destroyer.Text = "1"
         '
         'Label29
         '
@@ -1254,12 +1254,12 @@ Partial Class Form2
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.Label29)
-        Me.Controls.Add(Me.Label28)
+        Me.Controls.Add(Me.Destroyer)
         Me.Controls.Add(Me.Label27)
-        Me.Controls.Add(Me.Label26)
+        Me.Controls.Add(Me.Cruises)
         Me.Controls.Add(Me.Label24)
-        Me.Controls.Add(Me.Label25)
-        Me.Controls.Add(Me.Label23)
+        Me.Controls.Add(Me.Battleship)
+        Me.Controls.Add(Me.Carrier)
         Me.Controls.Add(Me.Label22)
         Me.Controls.Add(Me.Label21)
         Me.Controls.Add(Me.Label10)
@@ -1511,12 +1511,12 @@ Partial Class Form2
     Friend WithEvents Label20 As Label
     Friend WithEvents Label21 As Label
     Friend WithEvents Label22 As Label
-    Friend WithEvents Label23 As Label
+    Friend WithEvents Carrier As Label
     Friend WithEvents Label24 As Label
-    Friend WithEvents Label25 As Label
-    Friend WithEvents Label26 As Label
+    Friend WithEvents Battleship As Label
+    Friend WithEvents Cruises As Label
     Friend WithEvents Label27 As Label
-    Friend WithEvents Label28 As Label
+    Friend WithEvents Destroyer As Label
     Friend WithEvents Label29 As Label
     Friend WithEvents Label30 As Label
     Friend WithEvents Button1 As Button

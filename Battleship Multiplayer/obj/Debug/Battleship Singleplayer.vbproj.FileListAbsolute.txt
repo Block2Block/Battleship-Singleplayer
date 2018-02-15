@@ -54,3 +54,17 @@ C:\Users\User\source\repos\Battleship Multiplayer\Battleship Multiplayer\obj\Deb
 C:\Users\User\source\repos\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.exe
 C:\Users\User\source\repos\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.xml
 C:\Users\User\source\repos\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.pdb
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\bin\Debug\Battleship Singleplayer.exe.config
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\bin\Debug\Battleship Singleplayer.exe
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\bin\Debug\Battleship Singleplayer.pdb
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\bin\Debug\Battleship Singleplayer.xml
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.vbprojResolveAssemblyReference.cache
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.Form1.resources
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.Form2.resources
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.Form3.resources
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.Form4.resources
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.Resources.resources
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.vbproj.GenerateResource.Cache
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.exe
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.xml
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.pdb
