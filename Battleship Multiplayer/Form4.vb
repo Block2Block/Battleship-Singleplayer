@@ -1,5 +1,6 @@
 ﻿Public Class Form4
     Dim letters() As Char = {"A"c, "B"c, "C"c, "D"c, "E"c, "F"c, "G"c, "H"c, "I"c, "J"c}
+    Dim ships As List(Of String) = {""}
     Private Sub Form4_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Button1.Enabled = True
         Button2.Enabled = True
@@ -507,15 +508,19 @@
             Case "Carrier (5)"
                 y = 5
                 gv.carrierCount = gv.carrierCount - 1
+                My.Forms.Form2.Carrier.Text = gv.carrierCount
             Case "Battleship (4)"
                 y = 4
                 gv.battleshipCount = gv.battleshipCount - 1
+                My.Forms.Form2.Battleship.Text = gv.battleshipCount
             Case "Cruise (3)"
                 y = 3
                 gv.cruiseCount = gv.cruiseCount - 1
+                My.Forms.Form2.Cruises.Text = gv.cruiseCount
             Case "Destroyer (2)"
                 y = 2
                 gv.destroyerCount = gv.destroyerCount - 1
+                My.Forms.Form2.Destroyer.Text = gv.destroyerCount
         End Select
         Dim z As Byte = 0
         x = Array.IndexOf(letters, gv.selection.ToCharArray()(0))
@@ -529,9 +534,11 @@
         Catch ex As Exception
             z = Byte.Parse(gv.selection.ToCharArray()(1))
         End Try
+        ships.Clear()
 
         Do While y > 0
             DirectCast(My.Forms.Form2.Controls.Find((letters(x) & z.ToString), True)(0), Button).Text = "-"
+            ships.Add(letters(x) & z.ToString)
             y = y - 1
             If y > 0 Then
                 x = x - 1
@@ -540,6 +547,7 @@
         If gv.battleshipCount = 0 & gv.carrierCount = 0 & gv.cruiseCount = 0 & gv.destroyerCount = 0 Then
             My.Forms.Form2.Enabled = True
         End If
+        gv.shipLocations.Add(ships)
         My.Forms.Form2.Show()
         Me.Close()
     End Sub
@@ -551,15 +559,19 @@
             Case "Carrier (5)"
                 y = 5
                 gv.carrierCount = gv.carrierCount - 1
+                My.Forms.Form2.Carrier.Text = gv.carrierCount
             Case "Battleship (4)"
                 y = 4
                 gv.battleshipCount = gv.battleshipCount - 1
+                My.Forms.Form2.Battleship.Text = gv.battleshipCount
             Case "Cruise (3)"
                 y = 3
                 gv.cruiseCount = gv.cruiseCount - 1
+                My.Forms.Form2.Cruises.Text = gv.cruiseCount
             Case "Destroyer (2)"
                 y = 2
                 gv.destroyerCount = gv.destroyerCount - 1
+                My.Forms.Form2.Destroyer.Text = gv.destroyerCount
         End Select
 
         Try
@@ -571,10 +583,12 @@
         Catch ex As Exception
             x = Byte.Parse(gv.selection.ToCharArray()(1))
         End Try
+        ships.Clear()
 
         Do While y > 0
             Try
                 DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-"
+                ships.Add(gv.selection.ToCharArray()(0) & x.ToString)
             Catch ex As Exception
 
             End Try
@@ -586,6 +600,7 @@
         If gv.battleshipCount = 0 & gv.carrierCount = 0 & gv.cruiseCount = 0 & gv.destroyerCount = 0 Then
             My.Forms.Form2.Enabled = True
         End If
+        gv.shipLocations.Add(ships)
         My.Forms.Form2.Show()
         Me.Close()
     End Sub
@@ -597,15 +612,19 @@
             Case "Carrier (5)"
                 y = 5
                 gv.carrierCount = gv.carrierCount - 1
+                My.Forms.Form2.Carrier.Text = gv.carrierCount
             Case "Battleship (4)"
                 y = 4
                 gv.battleshipCount = gv.battleshipCount - 1
+                My.Forms.Form2.Battleship.Text = gv.battleshipCount
             Case "Cruise (3)"
                 y = 3
                 gv.cruiseCount = gv.cruiseCount - 1
+                My.Forms.Form2.Cruises.Text = gv.cruiseCount
             Case "Destroyer (2)"
                 y = 2
                 gv.destroyerCount = gv.destroyerCount - 1
+                My.Forms.Form2.Destroyer.Text = gv.destroyerCount
         End Select
 
         Try
@@ -617,9 +636,11 @@
         Catch ex As Exception
             x = Byte.Parse(gv.selection.ToCharArray()(1))
         End Try
+        ships.Clear()
 
         Do While y > 0
             DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-"
+            ships.Add(gv.selection.ToCharArray()(0) & x.ToString)
             y = y - 1
             If y > 0 Then
                 x = x + 1
@@ -628,6 +649,7 @@
         If gv.battleshipCount = 0 & gv.carrierCount = 0 & gv.cruiseCount = 0 & gv.destroyerCount = 0 Then
             My.Forms.Form2.Enabled = True
         End If
+        gv.shipLocations.Add(ships)
         My.Forms.Form2.Show()
         Me.Close()
     End Sub
@@ -639,15 +661,19 @@
             Case "Carrier (5)"
                 y = 5
                 gv.carrierCount = gv.carrierCount - 1
+                My.Forms.Form2.Carrier.Text = gv.carrierCount
             Case "Battleship (4)"
                 y = 4
                 gv.battleshipCount = gv.battleshipCount - 1
+                My.Forms.Form2.Battleship.Text = gv.battleshipCount
             Case "Cruise (3)"
                 y = 3
                 gv.cruiseCount = gv.cruiseCount - 1
+                My.Forms.Form2.Cruises.Text = gv.cruiseCount
             Case "Destroyer (2)"
                 y = 2
                 gv.destroyerCount = gv.destroyerCount - 1
+                My.Forms.Form2.Destroyer.Text = gv.destroyerCount
         End Select
 
         Dim z As Byte
@@ -663,19 +689,22 @@
         End Try
 
         x = Array.IndexOf(letters, gv.selection.ToCharArray()(0))
+        ships.Clear()
 
         Do While y > 0
             DirectCast(My.Forms.Form2.Controls.Find((letters(x) & z.ToString).ToString, True)(0), Button).Text = "-"
+            ships.Add(letters(x) & z.ToString)
             y = y - 1
             If y > 0 Then
                 x = x + 1
             End If
         Loop
-        My.Forms.Form2.Show()
-        Me.Close()
         If gv.battleshipCount = 0 & gv.carrierCount = 0 & gv.cruiseCount = 0 & gv.destroyerCount = 0 Then
             My.Forms.Form2.Enabled = True
         End If
+        gv.shipLocations.Add(ships)
+        My.Forms.Form2.Show()
+        Me.Close()
     End Sub
 
 End Class
