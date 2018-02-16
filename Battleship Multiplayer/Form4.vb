@@ -1,6 +1,6 @@
 ﻿Public Class Form4
     Dim letters() As Char = {"A"c, "B"c, "C"c, "D"c, "E"c, "F"c, "G"c, "H"c, "I"c, "J"c}
-    Dim ships As List(Of String) = {""}
+    Dim ships As List(Of String) = {""}.ToList
     Private Sub Form4_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Button1.Enabled = True
         Button2.Enabled = True
@@ -55,14 +55,12 @@
                 x = Array.IndexOf(letters, gv.selection.ToCharArray()(0))
 
                 Do While y > 0
-                    Console.WriteLine("1")
                     Try
                         If DirectCast(My.Forms.Form2.Controls.Find((letters(x) & gv.selection.ToCharArray()(1)).ToString, True)(0), Button).Text = "-" Then
                             Button1.Enabled = False
                             Exit Do
                         End If
                     Catch ex As Exception
-
                     End Try
                     y = y - 1
                     If x > 0 Then
@@ -72,14 +70,12 @@
                 y = 5
                 x = Array.IndexOf(letters, gv.selection.ToCharArray()(0))
                 Do While y > 0
-                    Console.WriteLine("2")
                     Try
                         If DirectCast(My.Forms.Form2.Controls.Find((letters(x) & gv.selection.ToCharArray()(1)).ToString, True)(0), Button).Text = "-" Then
                             Button4.Enabled = False
                             Exit Do
                         End If
                     Catch ex As Exception
-
                     End Try
                     y = y - 1
                     If x > 0 Then
@@ -98,14 +94,12 @@
                     x = Byte.Parse(gv.selection.ToCharArray()(1))
                 End Try
                 Do While y > 0
-                    Console.WriteLine("3")
                     Try
                         If DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
                             Button2.Enabled = False
                             Exit Do
                         End If
                     Catch ex As Exception
-
                     End Try
                     y = y - 1
                     If x > 0 Then
@@ -124,22 +118,20 @@
                 Catch ex As Exception
                     x = Byte.Parse(gv.selection.ToCharArray()(1))
                 End Try
-                If x < 6 Then
-                    Do While y > 0
-                        Try
-                            If DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
-                                Button3.Enabled = False
-                                Exit Do
-                            End If
-                        Catch ex As Exception
 
-                        End Try
-                        y = y - 1
-                        If x > 0 Then
-                            x = x + 1
+                Do While y > 0
+                    Try
+                        If DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
+                            Button3.Enabled = False
+                            Exit Do
                         End If
-                    Loop
-                End If
+                    Catch ex As Exception
+                    End Try
+                    y = y - 1
+                    If x > 0 Then
+                        x = x + 1
+                    End If
+                Loop
             Case "Battleship (4)"
                 Select Case gv.selection.ToCharArray()(0)
                     Case "A"c
@@ -180,14 +172,12 @@
                 x = Array.IndexOf(letters, gv.selection.ToCharArray()(0))
 
                 Do While y > 0
-                    Console.WriteLine("1")
                     Try
                         If DirectCast(My.Forms.Form2.Controls.Find((letters(x) & gv.selection.ToCharArray()(1)).ToString, True)(0), Button).Text = "-" Then
                             Button1.Enabled = False
                             Exit Do
                         End If
                     Catch ex As Exception
-
                     End Try
                     y = y - 1
                     If x > 0 Then
@@ -197,14 +187,12 @@
                 y = 4
                 x = Array.IndexOf(letters, gv.selection.ToCharArray()(0))
                 Do While y > 0
-                    Console.WriteLine("2")
                     Try
                         If DirectCast(My.Forms.Form2.Controls.Find((letters(x) & gv.selection.ToCharArray()(1)).ToString, True)(0), Button).Text = "-" Then
                             Button4.Enabled = False
                             Exit Do
                         End If
                     Catch ex As Exception
-
                     End Try
                     y = y - 1
                     If x > 0 Then
@@ -223,14 +211,12 @@
                     x = Byte.Parse(gv.selection.ToCharArray()(1))
                 End Try
                 Do While y > 0
-                    Console.WriteLine("3")
                     Try
                         If DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
                             Button2.Enabled = False
                             Exit Do
                         End If
                     Catch ex As Exception
-
                     End Try
                     y = y - 1
                     If x > 0 Then
@@ -249,22 +235,19 @@
                 Catch ex As Exception
                     x = Byte.Parse(gv.selection.ToCharArray()(1))
                 End Try
-                If x < 6 Then
-                    Do While y > 0
-                        Try
-                            If DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
-                                Button3.Enabled = False
-                                Exit Do
-                            End If
-                        Catch ex As Exception
-
-                        End Try
-                        y = y - 1
-                        If x > 0 Then
-                            x = x + 1
+                Do While y > 0
+                    Try
+                        If DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
+                            Button3.Enabled = False
+                            Exit Do
                         End If
-                    Loop
-                End If
+                    Catch ex As Exception
+                    End Try
+                    y = y - 1
+                    If x > 0 Then
+                        x = x + 1
+                    End If
+                Loop
             Case "Cruise (3)"
                 Select Case gv.selection.ToCharArray()(0)
                     Case "A"c
@@ -297,14 +280,12 @@
                 x = Array.IndexOf(letters, gv.selection.ToCharArray()(0))
 
                 Do While y > 0
-                    Console.WriteLine("1")
                     Try
                         If DirectCast(My.Forms.Form2.Controls.Find((letters(x) & gv.selection.ToCharArray()(1)).ToString, True)(0), Button).Text = "-" Then
                             Button1.Enabled = False
                             Exit Do
                         End If
                     Catch ex As Exception
-
                     End Try
                     y = y - 1
                     If x > 0 Then
@@ -314,14 +295,12 @@
                 y = 3
                 x = Array.IndexOf(letters, gv.selection.ToCharArray()(0))
                 Do While y > 0
-                    Console.WriteLine("2")
                     Try
                         If DirectCast(My.Forms.Form2.Controls.Find((letters(x) & gv.selection.ToCharArray()(1)).ToString, True)(0), Button).Text = "-" Then
                             Button4.Enabled = False
                             Exit Do
                         End If
                     Catch ex As Exception
-
                     End Try
                     y = y - 1
                     If x > 0 Then
@@ -340,14 +319,12 @@
                     x = Byte.Parse(gv.selection.ToCharArray()(1))
                 End Try
                 Do While y > 0
-                    Console.WriteLine("3")
                     Try
                         If DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
                             Button2.Enabled = False
                             Exit Do
                         End If
                     Catch ex As Exception
-
                     End Try
                     y = y - 1
                     If x > 0 Then
@@ -366,22 +343,19 @@
                 Catch ex As Exception
                     x = Byte.Parse(gv.selection.ToCharArray()(1))
                 End Try
-                If x < 6 Then
-                    Do While y > 0
-                        Try
-                            If DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
-                                Button3.Enabled = False
-                                Exit Do
-                            End If
-                        Catch ex As Exception
-
-                        End Try
-                        y = y - 1
-                        If x > 0 Then
-                            x = x + 1
+                Do While y > 0
+                    Try
+                        If DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
+                            Button3.Enabled = False
+                            Exit Do
                         End If
-                    Loop
-                End If
+                    Catch ex As Exception
+                    End Try
+                    y = y - 1
+                    If x > 0 Then
+                        x = x + 1
+                    End If
+                Loop
 
             Case "Destroyer (2)"
                 Select Case gv.selection.ToCharArray()(0)
@@ -396,14 +370,12 @@
                         x = Array.IndexOf(letters, gv.selection.ToCharArray()(0))
 
                         Do While y > 0
-                            Console.WriteLine("1")
                             Try
                                 If DirectCast(My.Forms.Form2.Controls.Find((letters(x) & gv.selection.ToCharArray()(1)).ToString, True)(0), Button).Text = "-" Then
                                     Button1.Enabled = False
                                     Exit Do
                                 End If
                             Catch ex As Exception
-
                             End Try
                             y = y - 1
                             If x > 0 Then
@@ -413,14 +385,12 @@
                         y = 2
                         x = Array.IndexOf(letters, gv.selection.ToCharArray()(0))
                         Do While y > 0
-                            Console.WriteLine("2")
                             Try
                                 If DirectCast(My.Forms.Form2.Controls.Find((letters(x) & gv.selection.ToCharArray()(1)).ToString, True)(0), Button).Text = "-" Then
                                     Button4.Enabled = False
                                     Exit Do
                                 End If
                             Catch ex As Exception
-
                             End Try
                             y = y - 1
                             If x > 0 Then
@@ -439,14 +409,12 @@
                             x = Byte.Parse(gv.selection.ToCharArray()(1))
                         End Try
                         Do While y > 0
-                            Console.WriteLine("3")
                             Try
                                 If DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
                                     Button2.Enabled = False
                                     Exit Do
                                 End If
                             Catch ex As Exception
-
                             End Try
                             y = y - 1
                             If x > 0 Then
@@ -465,22 +433,19 @@
                         Catch ex As Exception
                             x = Byte.Parse(gv.selection.ToCharArray()(1))
                         End Try
-                        If x < 6 Then
-                            Do While y > 0
-                                Try
-                                    If DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
-                                        Button3.Enabled = False
-                                        Exit Do
-                                    End If
-                                Catch ex As Exception
-
-                                End Try
-                                y = y - 1
+                        Do While y > 0
+                            Try
+                                If DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
+                                    Button3.Enabled = False
+                                    Exit Do
+                                End If
+                            Catch ex As Exception
+                            End Try
+                            y = y - 1
                                 If x > 0 Then
                                     x = x + 1
                                 End If
                             Loop
-                        End If
 
                 End Select
                 Select Case gv.selection.ToCharArray()(1)
@@ -544,8 +509,8 @@
                 x = x - 1
             End If
         Loop
-        If gv.battleshipCount = 0 & gv.carrierCount = 0 & gv.cruiseCount = 0 & gv.destroyerCount = 0 Then
-            My.Forms.Form2.Enabled = True
+        If (gv.battleshipCount = 0) And (gv.carrierCount = 0) And (gv.cruiseCount = 0) And (gv.destroyerCount = 0) Then
+            My.Forms.Form2.Button2.Enabled = True
         End If
         gv.shipLocations.Add(ships)
         My.Forms.Form2.Show()
@@ -590,15 +555,14 @@
                 DirectCast(My.Forms.Form2.Controls.Find((gv.selection.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-"
                 ships.Add(gv.selection.ToCharArray()(0) & x.ToString)
             Catch ex As Exception
-
             End Try
             y = y - 1
             If x > 0 Then
                 x = x - 1
             End If
         Loop
-        If gv.battleshipCount = 0 & gv.carrierCount = 0 & gv.cruiseCount = 0 & gv.destroyerCount = 0 Then
-            My.Forms.Form2.Enabled = True
+        If (gv.battleshipCount = 0) And (gv.carrierCount = 0) And (gv.cruiseCount = 0) And (gv.destroyerCount = 0) Then
+            My.Forms.Form2.Button2.Enabled = True
         End If
         gv.shipLocations.Add(ships)
         My.Forms.Form2.Show()
@@ -646,8 +610,8 @@
                 x = x + 1
             End If
         Loop
-        If gv.battleshipCount = 0 & gv.carrierCount = 0 & gv.cruiseCount = 0 & gv.destroyerCount = 0 Then
-            My.Forms.Form2.Enabled = True
+        If (gv.battleshipCount = 0) And (gv.carrierCount = 0) And (gv.cruiseCount = 0) And (gv.destroyerCount = 0) Then
+            My.Forms.Form2.Button2.Enabled = True
         End If
         gv.shipLocations.Add(ships)
         My.Forms.Form2.Show()
@@ -699,8 +663,8 @@
                 x = x + 1
             End If
         Loop
-        If gv.battleshipCount = 0 & gv.carrierCount = 0 & gv.cruiseCount = 0 & gv.destroyerCount = 0 Then
-            My.Forms.Form2.Enabled = True
+        If (gv.battleshipCount = 0) And (gv.carrierCount = 0) And (gv.cruiseCount = 0) And (gv.destroyerCount = 0) Then
+            My.Forms.Form2.Button2.Enabled = True
         End If
         gv.shipLocations.Add(ships)
         My.Forms.Form2.Show()

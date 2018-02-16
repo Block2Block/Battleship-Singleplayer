@@ -68,3 +68,5 @@ D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\o
 D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.exe
 D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.xml
 D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.pdb
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.Form5.resources
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.Form6.resources

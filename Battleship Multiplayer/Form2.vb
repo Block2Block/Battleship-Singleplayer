@@ -8,7 +8,8 @@
         gv.carrierCount = 1
         gv.cruiseCount = 2
         gv.destroyerCount = 1
-
+        gv.shipLocations.Clear()
+        gv.shipLocationsAI.Clear()
 
     End Sub
 
@@ -31,6 +32,24 @@
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        gv.shipLocationsAI.Clear()
+        placeShip(5)
+        placeShip(4)
+        placeShip(3)
+        placeShip(3)
+        placeShip(2)
+
+        For Each x In gv.shipLocations
+            For Each y In x
+                DirectCast(My.Forms.Form6.Controls.Find(y & "Player", True)(0), Button).Text = "-"
+            Next
+        Next
+
+        My.Forms.Form6.Show()
+        Me.Close()
+    End Sub
+
+    Private Sub placeShip(ByVal length As Byte)
         Dim number As Integer
         Dim number2 As Integer
         Randomize()
@@ -40,7 +59,7 @@
 
         Dim space As String = letters(number2) & number
         Dim x As Integer
-        If checkRight(space) Then
+        If checkRight(space, length) Then
             Try
                 If Byte.Parse(space.ToCharArray()(2)) = "0" Then
                     x = 10
@@ -53,7 +72,7 @@
 
             ship.Clear()
 
-            Dim y As Integer = 5
+            Dim y As Integer = length
 
             Do While y > 0
                 DirectCast(My.Forms.Form5.Controls.Find((space.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-"
@@ -63,29 +82,291 @@
                     x = x + 1
                 End If
             Loop
+        ElseIf checkUp(space, length) Then
+            Dim y As Byte = length
+            Dim z As Byte = 0
+            x = Array.IndexOf(letters, space.ToCharArray()(0))
+
+            Try
+                If Byte.Parse(space.ToCharArray()(2)) = "0" Then
+                    z = 10
+                Else
+                    z = Byte.Parse(space.ToCharArray()(1))
+                End If
+            Catch ex As Exception
+                z = Byte.Parse(space.ToCharArray()(1))
+            End Try
+            ship.Clear()
+
+            Do While y > 0
+                DirectCast(My.Forms.Form5.Controls.Find((letters(x) & z.ToString), True)(0), Button).Text = "-"
+                ship.Add(letters(x) & z.ToString)
+                y = y - 1
+                If y > 0 Then
+                    x = x + 1
+                End If
+            Loop
+        ElseIf checkLeft(space, length) Then
+            Try
+                If Byte.Parse(space.ToCharArray()(2)) = "0" Then
+                    x = 10
+                Else
+                    x = Byte.Parse(space.ToCharArray()(1))
+                End If
+            Catch ex As Exception
+                x = Byte.Parse(space.ToCharArray()(1))
+            End Try
+
+            ship.Clear()
+
+            Dim y As Integer = length
+
+            Do While y > 0
+                DirectCast(My.Forms.Form5.Controls.Find((space.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-"
+                ship.Add(space.ToCharArray()(0) & x.ToString)
+                y = y - 1
+                If y > 0 Then
+                    x = x - 1
+                End If
+            Loop
+        ElseIf checkDown(space, length) Then
+            Dim y As Byte = length
+            Dim z As Byte = 0
+            x = Array.IndexOf(letters, space.ToCharArray()(0))
+
+            Try
+                If Byte.Parse(space.ToCharArray()(2)) = "0" Then
+                    z = 10
+                Else
+                    z = Byte.Parse(space.ToCharArray()(1))
+                End If
+            Catch ex As Exception
+                z = Byte.Parse(space.ToCharArray()(1))
+            End Try
+            ship.Clear()
+
+            Do While y > 0
+                DirectCast(My.Forms.Form5.Controls.Find((letters(x) & z.ToString), True)(0), Button).Text = "-"
+                ship.Add(letters(x) & z.ToString)
+                y = y - 1
+                If y > 0 Then
+                    x = x - 1
+                End If
+            Loop
         End If
-
-
+        gv.shipLocationsAI.Add(ship)
     End Sub
 
-    Private Function checkRight(ByVal space As String) As Boolean
-        Select Case space.ToCharArray()(1)
-            Case "1"c
-                Try
-                    If space.ToCharArray()(2) = "0"c Then
+    Private Function checkRight(ByVal space As String, ByVal length As Byte) As Boolean
+        Select Case length
+            Case 5
+                Select Case space.ToCharArray()(1)
+                    Case "1"c
+                        Try
+                            If space.ToCharArray()(2) = "0"c Then
+                                Return False
+                            End If
+                        Catch ex As Exception
+                        End Try
+                    Case "7"c
                         Return False
-                    End If
-                Catch ex As Exception
-                End Try
-            Case "7"c
-                Return False
-            Case "8"c
-                Return False
-            Case "9"c
-                Return False
+                    Case "8"c
+                        Return False
+                    Case "9"c
+                        Return False
+                End Select
+            Case 4
+                Select Case space.ToCharArray()(1)
+                    Case "1"c
+                        Try
+                            If space.ToCharArray()(2) = "0"c Then
+                                Return False
+                            End If
+                        Catch ex As Exception
+                        End Try
+                    Case "8"c
+                        Return False
+                    Case "9"c
+                        Return False
+                End Select
+            Case 3
+                Select Case space.ToCharArray()(1)
+                    Case "1"c
+                        Try
+                            If space.ToCharArray()(2) = "0"c Then
+                                Return False
+                            End If
+                        Catch ex As Exception
+                        End Try
+                    Case "9"c
+                        Return False
+                End Select
+            Case 2
+                Select Case space.ToCharArray()(1)
+                    Case "1"c
+                        Try
+                            If space.ToCharArray()(2) = "0"c Then
+                                Return False
+                            End If
+                        Catch ex As Exception
+                        End Try
+                End Select
         End Select
+
         Dim x As Byte = 0
-        Dim y As Byte = 5
+        Dim y As Byte = length
+        Try
+            If Byte.Parse(space.ToCharArray()(2)) = "0" Then
+                x = 10
+            Else
+                x = Byte.Parse(space.ToCharArray()(1))
+            End If
+        Catch ex As Exception
+            x = Byte.Parse(space.ToCharArray()(1))
+        End Try
+
+        Do While y > 0
+            Try
+                If DirectCast(My.Forms.Form5.Controls.Find((space.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
+                    Return False
+                    Exit Do
+                End If
+            Catch ex As Exception
+            End Try
+            y = y - 1
+            If x > 0 Then
+                x = x + 1
+            End If
+        Loop
+
+        Return True
+    End Function
+
+    Private Function checkLeft(ByVal space As String, ByVal length As Byte) As Boolean
+        Select Case length
+            Case 5
+                Select Case space.ToCharArray()(1)
+                    Case "1"c
+                        Try
+                            If space.ToCharArray()(2) = "0"c Then
+                            End If
+                        Catch ex As Exception
+                            Return False
+                        End Try
+                    Case "2"c
+                        Return False
+                    Case "3"c
+                        Return False
+                    Case "4"c
+                        Return False
+                End Select
+            Case 4
+                Select Case space.ToCharArray()(1)
+                    Case "1"c
+                        Try
+                            If space.ToCharArray()(2) = "0"c Then
+
+                            End If
+                        Catch ex As Exception
+                            Return False
+                        End Try
+                    Case "2"c
+                        Return False
+                    Case "3"c
+                        Return False
+                End Select
+            Case 3
+                Select Case space.ToCharArray()(1)
+                    Case "1"c
+                        Try
+                            If space.ToCharArray()(2) = "0"c Then
+                            End If
+                        Catch ex As Exception
+                            Return False
+                        End Try
+                    Case "2"c
+                        Return False
+                End Select
+            Case 2
+                Select Case space.ToCharArray()(1)
+                    Case "1"c
+                        Try
+                            If space.ToCharArray()(2) = "0"c Then
+                            End If
+                        Catch ex As Exception
+                            Return False
+                        End Try
+                End Select
+        End Select
+
+        Dim x As Byte = 0
+        Dim y As Byte = length
+
+        Try
+            If Byte.Parse(space.ToCharArray()(2)) = "0" Then
+                x = 10
+            Else
+                x = Byte.Parse(space.ToCharArray()(1))
+            End If
+        Catch ex As Exception
+            x = Byte.Parse(space.ToCharArray()(1))
+        End Try
+
+        Do While y > 0
+            Try
+                If DirectCast(My.Forms.Form5.Controls.Find((space.ToCharArray()(0) & x.ToString).ToString, True)(0), Button).Text = "-" Then
+                    Return False
+                    Exit Do
+                End If
+            Catch ex As Exception
+            End Try
+            y = y - 1
+            If x > 0 Then
+                x = x - 1
+            End If
+        Loop
+
+        Return True
+    End Function
+
+    Private Function checkUp(ByVal space As String, ByVal length As Byte) As Boolean
+        Select Case length
+            Case 5
+                Select Case space.ToCharArray()(0)
+                    Case "A"c
+                        Return False
+                    Case "B"c
+                        Return False
+                    Case "C"c
+                        Return False
+                    Case "D"c
+                        Return False
+                End Select
+            Case 4
+                Select Case space.ToCharArray()(0)
+                    Case "A"c
+                        Return False
+                    Case "B"c
+                        Return False
+                    Case "C"c
+                        Return False
+                End Select
+            Case 3
+                Select Case space.ToCharArray()(0)
+                    Case "A"c
+                        Return False
+                    Case "B"c
+                        Return False
+                End Select
+            Case 2
+                Select Case space.ToCharArray()(0)
+                    Case "A"c
+                        Return False
+                End Select
+        End Select
+
+        Dim x As Byte = 0
+        Dim y As Byte = length
 
         x = Array.IndexOf(letters, space.ToCharArray()(0))
 
@@ -96,11 +377,68 @@
                     Exit Do
                 End If
             Catch ex As Exception
-
             End Try
             y = y - 1
             If x > 0 Then
                 x = x - 1
+            End If
+        Loop
+
+        Return True
+    End Function
+
+    Private Function checkDown(ByVal space As String, ByVal length As Byte) As Boolean
+        Select Case length
+            Case 5
+                Select Case space.ToCharArray()(0)
+                    Case "G"c
+                        Return False
+                    Case "H"c
+                        Return False
+                    Case "I"c
+                        Return False
+                    Case "J"c
+                        Return False
+                End Select
+            Case 4
+                Select Case space.ToCharArray()(0)
+                    Case "H"c
+                        Return False
+                    Case "I"c
+                        Return False
+                    Case "J"c
+                        Return False
+                End Select
+            Case 3
+                Select Case space.ToCharArray()(0)
+                    Case "I"c
+                        Return False
+                    Case "J"c
+                        Return False
+                End Select
+            Case 2
+                Select Case space.ToCharArray()(0)
+                    Case "J"c
+                        Return False
+                End Select
+        End Select
+
+        Dim x As Byte = 0
+        Dim y As Byte = length
+
+        x = Array.IndexOf(letters, space.ToCharArray()(0))
+
+        Do While y > 0
+            Try
+                If DirectCast(My.Forms.Form5.Controls.Find((letters(x) & space.ToCharArray()(1)).ToString, True)(0), Button).Text = "-" Then
+                    Return False
+                    Exit Do
+                End If
+            Catch ex As Exception
+            End Try
+            y = y - 1
+            If x > 0 Then
+                x = x + 1
             End If
         Loop
 
