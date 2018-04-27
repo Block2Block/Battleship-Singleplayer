@@ -2603,7 +2603,7 @@ Partial Class Form6
         Me.Controls.Add(Me.A2)
         Me.Controls.Add(Me.A1)
         Me.Name = "Form6"
-        Me.Text = "Form6"
+        Me.Text = "Boards"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

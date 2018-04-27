@@ -1383,7 +1383,7 @@ Partial Class Form2
         Me.Controls.Add(Me.A2)
         Me.Controls.Add(Me.A1)
         Me.Name = "Form2"
-        Me.Text = " "
+        Me.Text = " Select Your Space!"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

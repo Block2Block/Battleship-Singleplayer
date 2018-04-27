@@ -1,8 +1,9 @@
 ﻿Public Class Form2
     Dim letters() As Char = {"A"c, "B"c, "C"c, "D"c, "E"c, "F"c, "G"c, "H"c, "I"c, "J"c}
-    Dim ship As List(Of String) = {""}.ToList
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         My.Forms.Form1.Hide()
+        My.Forms.Form5.Close()
+        My.Forms.Form5.Activate()
 
         gv.battleshipCount = 1
         gv.carrierCount = 1
@@ -10,6 +11,7 @@
         gv.destroyerCount = 1
         gv.shipLocations.Clear()
         gv.shipLocationsAI.Clear()
+
 
     End Sub
 
@@ -38,6 +40,12 @@
         placeShip(3)
         placeShip(3)
         placeShip(2)
+        For Each x In gv.shipLocationsAI
+            For Each y In x
+                Console.Write(y + " ")
+            Next
+            Console.WriteLine(" ")
+        Next
 
         For Each x In gv.shipLocations
             For Each y In x
@@ -53,9 +61,10 @@
         Dim number As Integer
         Dim number2 As Integer
         Randomize()
-        'this is where i cry because i need to make ai to choose spaces. :'(
         number = Int(Rnd() * 10) + 1
         number2 = Int(Rnd() * 9) + 1
+
+        Dim ship As List(Of String) = {""}.ToList
 
         Dim space As String = letters(number2) & number
         Dim x As Integer
@@ -103,7 +112,7 @@
                 ship.Add(letters(x) & z.ToString)
                 y = y - 1
                 If y > 0 Then
-                    x = x + 1
+                    x = x - 1
                 End If
             Loop
         ElseIf checkLeft(space, length) Then
@@ -150,11 +159,15 @@
                 ship.Add(letters(x) & z.ToString)
                 y = y - 1
                 If y > 0 Then
-                    x = x - 1
+                    x = x + 1
                 End If
             Loop
+        Else
+            placeShip(length)
         End If
+        Console.WriteLine(ship)
         gv.shipLocationsAI.Add(ship)
+        Console.WriteLine(gv.shipLocationsAI)
     End Sub
 
     Private Function checkRight(ByVal space As String, ByVal length As Byte) As Boolean

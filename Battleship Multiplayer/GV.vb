@@ -7,4 +7,7 @@
     Public Shared cruiseCount As Byte = 2
     Public Shared battleshipCount As Byte = 1
     Public Shared carrierCount As Byte = 1
+    Public Shared lastRoundHit As Boolean = False
+    Public Shared lastRoundSpace As String
+    Public Shared lastRoundSunk As Boolean = False
 End Class
