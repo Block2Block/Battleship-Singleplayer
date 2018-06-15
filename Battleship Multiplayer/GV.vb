@@ -10,4 +10,8 @@
     Public Shared lastRoundHit As Boolean = False
     Public Shared lastRoundSpace As String
     Public Shared lastRoundSunk As Boolean = False
+    Public Shared lastRoundFoundShip As Boolean = False
+    Public Shared lastRoundShipInitialLocation As String
+    Public Shared lastRoundDirection As String = "None"
+    Public Shared lastRoundHitsInDirection As String = "None"
 End Class
