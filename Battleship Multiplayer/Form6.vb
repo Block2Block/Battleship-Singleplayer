@@ -54,18 +54,17 @@
                                     x.Remove(space)
                                     If x.Count > 0 Then
                                         gv.shipLocations.Add(x)
-                                        MsgBox("The AI Hit!")
+                                        MsgBox("The AI chose " & space & ". The AI Hit!")
                                         gv.lastRoundHit = True
                                         gv.lastRoundSunk = False
                                         gv.lastRoundSpace = space
-                                        gv.lastRoundFoundShip = True
-                                        gv.lastRoundShipInitialLocation = space
                                         button.Text = "X"
                                         gv.lastRoundHitsInDirection = True
+                                        Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
                                         AI_Turn()
                                         Exit Sub
                                     End If
-                                    MsgBox("The AI Sunk A Ship!")
+                                    MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
                                     gv.lastRoundHit = True
                                     gv.lastRoundSunk = True
                                     gv.lastRoundSpace = space
@@ -79,11 +78,12 @@
                                         Me.Close()
                                         Exit Sub
                                     End If
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
                                     AI_Turn()
                                     Exit Sub
                                 End If
                             Next
-                            MsgBox("The AI Missed!")
+                            MsgBox("The AI chose " & space & ". The AI Missed!")
                             gv.lastRoundHit = False
                             gv.lastRoundSunk = False
                             gv.lastRoundSpace = space
@@ -94,7 +94,7 @@
                         End If
                     Else
                         'go to the right
-                        Dim space As String = gv.lastRoundSpace.ToCharArray()(0) & (Byte.Parse(gv.lastRoundSpace.ToCharArray()(1).ToString) - 1)
+                        Dim space As String = gv.lastRoundSpace.ToCharArray()(0) & (Byte.Parse(gv.lastRoundSpace.ToCharArray()(1).ToString) + 1)
                         gv.lastRoundDirection = "Right"
                         gv.lastRoundSpace = space
                         gv.lastRoundHit = False
@@ -108,18 +108,17 @@
                                     x.Remove(space)
                                     If x.Count > 0 Then
                                         gv.shipLocations.Add(x)
-                                        MsgBox("The AI Hit!")
+                                        MsgBox("The AI chose " & space & ". The AI Hit!")
                                         gv.lastRoundHit = True
                                         gv.lastRoundSunk = False
                                         gv.lastRoundSpace = space
-                                        gv.lastRoundFoundShip = True
-                                        gv.lastRoundShipInitialLocation = space
                                         button.Text = "X"
                                         gv.lastRoundHitsInDirection = True
+                                        Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
                                         AI_Turn()
                                         Exit Sub
                                     End If
-                                    MsgBox("The AI Sunk A Ship!")
+                                    MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
                                     gv.lastRoundHit = True
                                     gv.lastRoundSunk = True
                                     gv.lastRoundSpace = space
@@ -133,11 +132,12 @@
                                         Me.Close()
                                         Exit Sub
                                     End If
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
                                     AI_Turn()
                                     Exit Sub
                                 End If
                             Next
-                            MsgBox("The AI Missed!")
+                            MsgBox("The AI chose " & space & ". The AI Missed!")
                             gv.lastRoundHit = False
                             gv.lastRoundSunk = False
                             gv.lastRoundSpace = space
@@ -153,28 +153,449 @@
                         Case "Left"
                             If gv.lastRoundSpace.Contains("1") Then
                                 gv.lastRoundDirection = "Right"
-                                gv.lastRoundSpace = gv.lastRoundSpace.ToCharArray()(0) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)) + 1)
+                                gv.lastRoundSpace = gv.lastRoundSpace.ToCharArray()(0) & (Integer.Parse(gv.lastRoundSpace.ToCharArray()(1)) + 1)
+                                Dim space As String = gv.lastRoundSpace
 
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
                             Else
+                                gv.lastRoundSpace = gv.lastRoundSpace.ToCharArray()(0) & (Integer.Parse(gv.lastRoundSpace.ToCharArray()(1)) - 1)
+                                Dim space As String = gv.lastRoundSpace
 
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
                             End If
                         Case "Right"
                             If gv.lastRoundSpace.Contains("10") Then
+                                gv.lastRoundDirection = "Left"
+                                gv.lastRoundSpace = gv.lastRoundSpace.ToCharArray()(0) & (Integer.Parse(gv.lastRoundSpace.ToCharArray()(1)) - 1)
+                                Dim space As String = gv.lastRoundSpace
 
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
                             Else
+                                gv.lastRoundSpace = gv.lastRoundSpace.ToCharArray()(0) & (Integer.Parse(gv.lastRoundSpace.ToCharArray()(1)) + 1)
+                                Dim space As String = gv.lastRoundSpace
 
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
                             End If
                         Case "Up"
                             If gv.lastRoundSpace.Contains("A") Then
+                                gv.lastRoundDirection = "Down"
+                                If gv.lastRoundSpace.Contains("10") Then
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundSpace.ToCharArray()(0)) + 1) & (Integer.Parse(10))
+                                Else
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundSpace.ToCharArray()(0)) + 1) & (Integer.Parse(gv.lastRoundSpace.ToCharArray()(1)))
+                                End If
+                                Dim space As String = gv.lastRoundSpace
 
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
                             Else
+                                gv.lastRoundDirection = "Up"
+                                If gv.lastRoundSpace.Contains("10") Then
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundSpace.ToCharArray()(0)) - 1) & (Integer.Parse(10))
+                                Else
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundSpace.ToCharArray()(0)) - 1) & (Integer.Parse(gv.lastRoundSpace.ToCharArray()(1)))
+                                End If
+                                Dim space As String = gv.lastRoundSpace
 
+                                Console.WriteLine("Selected Space: " & space)
+
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
                             End If
                         Case "Down"
                             If gv.lastRoundSpace.Contains("J") Then
+                                gv.lastRoundDirection = "Up"
+                                If gv.lastRoundSpace.Contains("10") Then
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundSpace.ToCharArray()(0)) - 1) & (Integer.Parse(10))
+                                Else
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundSpace.ToCharArray()(0)) - 1) & (Integer.Parse(gv.lastRoundSpace.ToCharArray()(1)))
+                                End If
+                                Dim space As String = gv.lastRoundSpace
 
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
                             Else
+                                If gv.lastRoundSpace.Contains("10") Then
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundSpace.ToCharArray()(0)) + 1) & (Integer.Parse(10))
+                                Else
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundSpace.ToCharArray()(0)) + 1) & (Integer.Parse(gv.lastRoundSpace.ToCharArray()(1)))
+                                End If
+                                Dim space As String = gv.lastRoundSpace
 
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
                             End If
                     End Select
                 End If
@@ -183,19 +604,645 @@
                 Select Case gv.lastRoundDirection
                     Case "Left"
                         If gv.lastRoundHitsInDirection Then
+                            gv.lastRoundDirection = "Right"
+                            gv.lastRoundSpace = gv.lastRoundShipInitialLocation.ToCharArray()(0) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)) + 1)
+                            Dim space As String = gv.lastRoundSpace
+                            Console.WriteLine("Selected Space: " & space)
 
+                            Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                            If button.Text = "-" Or button.Text = "" Then
+                                For Each x In gv.shipLocations
+                                    If x.Contains(space) Then
+                                        gv.shipLocations.Remove(x)
+                                        x.Remove(space)
+                                        If x.Count > 0 Then
+                                            gv.shipLocations.Add(x)
+                                            MsgBox("The AI chose " & space & ". The AI Hit!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = False
+                                            gv.lastRoundSpace = space
+                                            button.Text = "X"
+                                            gv.lastRoundHitsInDirection = True
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                        MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                        gv.lastRoundHit = True
+                                        gv.lastRoundSunk = True
+                                        gv.lastRoundSpace = space
+                                        gv.lastRoundFoundShip = False
+                                        gv.lastRoundHitsInDirection = False
+                                        button.Text = "X"
+                                        If gv.shipLocations.Count = 0 Then
+                                            MsgBox("You Lost! The AI sunk all of your ships!")
+                                            Form1.Activate()
+                                            Form1.Show()
+                                            Me.Close()
+                                            Exit Sub
+                                        End If
+                                        Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                        AI_Turn()
+                                        Exit Sub
+                                    End If
+                                Next
+                                MsgBox("The AI chose " & space & ". The AI Missed!")
+                                gv.lastRoundHit = False
+                                gv.lastRoundSunk = False
+                                gv.lastRoundSpace = space
+                                lblTurn.Text = "Your Turn"
+                                button.Text = "O"
+                            Else
+                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                AI_Turn()
+                            End If
+                        Else
+                            If gv.lastRoundShipInitialLocation.Contains("A") Then
+                                gv.lastRoundDirection = "Down"
+                                If gv.lastRoundShipInitialLocation.Contains("10") Then
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) + 1) & (Integer.Parse(10))
+                                Else
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) + 1) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)))
+                                End If
+                                Dim space As String = gv.lastRoundSpace
+
+                                Console.WriteLine("Selected Space: " & space)
+
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
+                            Else
+                                gv.lastRoundDirection = "Up"
+                                If gv.lastRoundShipInitialLocation.Contains("10") Then
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) - 1) & (Integer.Parse(10))
+                                Else
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) - 1) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)))
+                                End If
+                                Dim space As String = gv.lastRoundSpace
+
+                                Console.WriteLine("Selected Space: " & space)
+
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
+                            End If
                         End If
                     Case "Right"
                         If gv.lastRoundHitsInDirection Then
+                            gv.lastRoundDirection = "Left"
+                            gv.lastRoundSpace = gv.lastRoundShipInitialLocation.ToCharArray()(0) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)) - 1)
+                            Dim space As String = gv.lastRoundSpace
 
+                            Console.WriteLine("Selected Space: " & space)
+
+                            Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                            If button.Text = "-" Or button.Text = "" Then
+                                For Each x In gv.shipLocations
+                                    If x.Contains(space) Then
+                                        gv.shipLocations.Remove(x)
+                                        x.Remove(space)
+                                        If x.Count > 0 Then
+                                            gv.shipLocations.Add(x)
+                                            MsgBox("The AI chose " & space & ". The AI Hit!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = False
+                                            gv.lastRoundSpace = space
+                                            button.Text = "X"
+                                            gv.lastRoundHitsInDirection = True
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                        MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                        gv.lastRoundHit = True
+                                        gv.lastRoundSunk = True
+                                        gv.lastRoundSpace = space
+                                        gv.lastRoundFoundShip = False
+                                        gv.lastRoundHitsInDirection = False
+                                        button.Text = "X"
+                                        If gv.shipLocations.Count = 0 Then
+                                            MsgBox("You Lost! The AI sunk all of your ships!")
+                                            Form1.Activate()
+                                            Form1.Show()
+                                            Me.Close()
+                                            Exit Sub
+                                        End If
+                                        AI_Turn()
+                                        Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                        Exit Sub
+                                    End If
+                                Next
+                                MsgBox("The AI chose " & space & ". The AI Missed!")
+                                gv.lastRoundHit = False
+                                gv.lastRoundSunk = False
+                                gv.lastRoundSpace = space
+                                lblTurn.Text = "Your Turn"
+                                button.Text = "O"
+                            Else
+                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                AI_Turn()
+                            End If
+                        Else
+                            If gv.lastRoundShipInitialLocation.Contains("1") Then
+                                gv.lastRoundDirection = "Up"
+                                If gv.lastRoundShipInitialLocation.Contains("10") Then
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) - 1) & (Integer.Parse(10))
+                                Else
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) - 1) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)))
+                                End If
+                                Dim space As String = gv.lastRoundSpace
+
+                                Console.WriteLine("Selected Space: " & space)
+
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
+                            Else
+                                gv.lastRoundDirection = "Left"
+                                gv.lastRoundSpace = gv.lastRoundShipInitialLocation.ToCharArray()(0) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)) - 1)
+                                Dim space As String = gv.lastRoundSpace
+
+                                Console.WriteLine("Selected Space: " & space)
+
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
+                            End If
                         End If
                     Case "Up"
                         If gv.lastRoundHitsInDirection Then
+                            gv.lastRoundDirection = "Down"
+                            If gv.lastRoundShipInitialLocation.Contains("10") Then
+                                gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) + 1) & (Integer.Parse(10))
+                            Else
+                                gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) + 1) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)))
+                            End If
+                            Dim space As String = gv.lastRoundSpace
 
+                            Console.WriteLine("Selected Space: " & space)
+
+                            Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                            If button.Text = "-" Or button.Text = "" Then
+                                For Each x In gv.shipLocations
+                                    If x.Contains(space) Then
+                                        gv.shipLocations.Remove(x)
+                                        x.Remove(space)
+                                        If x.Count > 0 Then
+                                            gv.shipLocations.Add(x)
+                                            MsgBox("The AI chose " & space & ". The AI Hit!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = False
+                                            gv.lastRoundSpace = space
+                                            button.Text = "X"
+                                            gv.lastRoundHitsInDirection = True
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                        MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                        gv.lastRoundHit = True
+                                        gv.lastRoundSunk = True
+                                        gv.lastRoundSpace = space
+                                        gv.lastRoundFoundShip = False
+                                        gv.lastRoundHitsInDirection = False
+                                        button.Text = "X"
+                                        If gv.shipLocations.Count = 0 Then
+                                            MsgBox("You Lost! The AI sunk all of your ships!")
+                                            Form1.Activate()
+                                            Form1.Show()
+                                            Me.Close()
+                                            Exit Sub
+                                        End If
+                                        Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                        AI_Turn()
+                                        Exit Sub
+                                    End If
+                                Next
+                                MsgBox("The AI chose " & space & ". The AI Missed!")
+                                gv.lastRoundHit = False
+                                gv.lastRoundSunk = False
+                                gv.lastRoundSpace = space
+                                lblTurn.Text = "Your Turn"
+                                button.Text = "O"
+                            Else
+                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                AI_Turn()
+                            End If
+                        Else
+                            If gv.lastRoundShipInitialLocation.Contains("J") Then
+                                gv.lastRoundDirection = "Right"
+                                gv.lastRoundSpace = gv.lastRoundShipInitialLocation.ToCharArray()(0) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)) + 1)
+                                Dim space As String = gv.lastRoundSpace
+
+                                Console.WriteLine("Selected Space: " & space)
+
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
+                            Else
+                                gv.lastRoundDirection = "Down"
+                                If gv.lastRoundShipInitialLocation.Contains("10") Then
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) + 1) & (Integer.Parse(10))
+                                Else
+                                    gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) + 1) & (Integer.Parse(gv.lastRoundSpace.ToCharArray()(1)))
+                                End If
+                                Dim space As String = gv.lastRoundSpace
+
+                                Console.WriteLine("Selected Space: " & space)
+
+                                Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                                If button.Text = "-" Or button.Text = "" Then
+                                    For Each x In gv.shipLocations
+                                        If x.Contains(space) Then
+                                            gv.shipLocations.Remove(x)
+                                            x.Remove(space)
+                                            If x.Count > 0 Then
+                                                gv.shipLocations.Add(x)
+                                                MsgBox("The AI chose " & space & ". The AI Hit!")
+                                                gv.lastRoundHit = True
+                                                gv.lastRoundSunk = False
+                                                gv.lastRoundSpace = space
+                                                button.Text = "X"
+                                                gv.lastRoundHitsInDirection = True
+                                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                AI_Turn()
+                                                Exit Sub
+                                            End If
+                                            MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = True
+                                            gv.lastRoundSpace = space
+                                            gv.lastRoundFoundShip = False
+                                            gv.lastRoundHitsInDirection = False
+                                            button.Text = "X"
+                                            If gv.shipLocations.Count = 0 Then
+                                                MsgBox("You Lost! The AI sunk all of your ships!")
+                                                Form1.Activate()
+                                                Form1.Show()
+                                                Me.Close()
+                                                Exit Sub
+                                            End If
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                    Next
+                                    MsgBox("The AI chose " & space & ". The AI Missed!")
+                                    gv.lastRoundHit = False
+                                    gv.lastRoundSunk = False
+                                    gv.lastRoundSpace = space
+                                    lblTurn.Text = "Your Turn"
+                                    button.Text = "O"
+                                Else
+                                    Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                    AI_Turn()
+                                End If
+                            End If
                         End If
                     Case "Down"
                         If gv.lastRoundHitsInDirection Then
+                            gv.lastRoundHitsInDirection = "Up"
+                            If gv.lastRoundShipInitialLocation.Contains("10") Then
+                                gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) - 1) & (Integer.Parse(10))
+                            Else
+                                gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) - 1) & (Integer.Parse(gv.lastRoundSpace.ToCharArray()(1)))
+                            End If
+                            Dim space As String = gv.lastRoundSpace
 
+                            Console.WriteLine("Selected Space: " & space)
+
+                            Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                            If button.Text = "-" Or button.Text = "" Then
+                                For Each x In gv.shipLocations
+                                    If x.Contains(space) Then
+                                        gv.shipLocations.Remove(x)
+                                        x.Remove(space)
+                                        If x.Count > 0 Then
+                                            gv.shipLocations.Add(x)
+                                            MsgBox("The AI chose " & space & ". The AI Hit!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = False
+                                            gv.lastRoundSpace = space
+                                            button.Text = "X"
+                                            gv.lastRoundHitsInDirection = True
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                        MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                        gv.lastRoundHit = True
+                                        gv.lastRoundSunk = True
+                                        gv.lastRoundSpace = space
+                                        gv.lastRoundFoundShip = False
+                                        gv.lastRoundHitsInDirection = False
+                                        button.Text = "X"
+                                        If gv.shipLocations.Count = 0 Then
+                                            MsgBox("The AI chose " & space & ". You Lost! The AI sunk all of your ships!")
+                                            Form1.Activate()
+                                            Form1.Show()
+                                            Me.Close()
+                                            Exit Sub
+                                        End If
+                                        Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                        AI_Turn()
+                                        Exit Sub
+                                    End If
+                                Next
+                                MsgBox("The AI Missed!")
+                                gv.lastRoundHit = False
+                                gv.lastRoundSunk = False
+                                gv.lastRoundSpace = space
+                                lblTurn.Text = "Your Turn"
+                                button.Text = "O"
+                            Else
+                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                AI_Turn()
+                            End If
+                        Else
+                            gv.lastRoundDirection = "Right"
+                            gv.lastRoundSpace = gv.lastRoundShipInitialLocation.ToCharArray()(0) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)) + 1)
+                            Dim space As String = gv.lastRoundSpace
+
+                            Console.WriteLine("Selected Space: " & space)
+
+                            Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+
+                            If button.Text = "-" Or button.Text = "" Then
+                                For Each x In gv.shipLocations
+                                    If x.Contains(space) Then
+                                        gv.shipLocations.Remove(x)
+                                        x.Remove(space)
+                                        If x.Count > 0 Then
+                                            gv.shipLocations.Add(x)
+                                            MsgBox("The AI chose " & space & ". The AI Hit!")
+                                            gv.lastRoundHit = True
+                                            gv.lastRoundSunk = False
+                                            gv.lastRoundSpace = space
+                                            button.Text = "X"
+                                            gv.lastRoundHitsInDirection = True
+                                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                            AI_Turn()
+                                            Exit Sub
+                                        End If
+                                        MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
+                                        gv.lastRoundHit = True
+                                        gv.lastRoundSunk = True
+                                        gv.lastRoundSpace = space
+                                        gv.lastRoundFoundShip = False
+                                        gv.lastRoundHitsInDirection = False
+                                        button.Text = "X"
+                                        If gv.shipLocations.Count = 0 Then
+                                            MsgBox("You Lost! The AI sunk all of your ships!")
+                                            Form1.Activate()
+                                            Form1.Show()
+                                            Me.Close()
+                                            Exit Sub
+                                        End If
+                                        Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                        AI_Turn()
+                                        Exit Sub
+                                    End If
+                                Next
+                                MsgBox("The AI chose " & space & ". The AI Missed!")
+                                gv.lastRoundHit = False
+                                gv.lastRoundSunk = False
+                                gv.lastRoundSpace = space
+                                lblTurn.Text = "Your Turn"
+                                button.Text = "O"
+                            Else
+                                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                AI_Turn()
+                            End If
                         End If
                 End Select
             End If
@@ -217,17 +1264,19 @@
                         x.Remove(space)
                         If x.Count > 0 Then
                             gv.shipLocations.Add(x)
-                            MsgBox("The AI Hit!")
+                            MsgBox("The AI chose " & space & ". The AI Hit!")
                             gv.lastRoundHit = True
                             gv.lastRoundSunk = False
                             gv.lastRoundSpace = space
                             gv.lastRoundFoundShip = True
                             gv.lastRoundShipInitialLocation = space
+                            Console.WriteLine("Ship found! Located at: " & space)
                             button.Text = "X"
+                            Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
                             AI_Turn()
                             Exit Sub
                         End If
-                        MsgBox("The AI Sunk A Ship!")
+                        MsgBox("The AI chose " & space & ". The AI Sunk A Ship!")
                         gv.lastRoundHit = True
                         gv.lastRoundSunk = True
                         gv.lastRoundSpace = space
@@ -240,23 +1289,21 @@
                             Me.Close()
                             Exit Sub
                         End If
+                        Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
                         AI_Turn()
                         Exit Sub
                     End If
                 Next
-                MsgBox("The AI Missed!")
+                MsgBox("The AI chose " & space & ". The AI Missed!")
                 gv.lastRoundHit = False
                 gv.lastRoundSunk = False
                 gv.lastRoundSpace = space
                 lblTurn.Text = "Your Turn"
                 button.Text = "O"
             Else
+                Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
                 AI_Turn()
             End If
         End If
-    End Sub
-
-    Private Sub Form6_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
     End Sub
 End Class
