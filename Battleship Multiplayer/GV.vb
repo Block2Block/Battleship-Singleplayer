@@ -14,4 +14,5 @@
     Public Shared lastRoundShipInitialLocation As String
     Public Shared lastRoundDirection As String = "None"
     Public Shared lastRoundHitsInDirection As Boolean = False
+    Public Shared lastRoundInfinateLoop As Boolean = False
 End Class
