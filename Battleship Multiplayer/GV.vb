@@ -15,4 +15,6 @@
     Public Shared lastRoundDirection As String = "None"
     Public Shared lastRoundHitsInDirection As Boolean = False
     Public Shared lastRoundInfinateLoop As Boolean = False
+    Public Shared lastRoundInfinateLoopVertical As Boolean = False
+    Public Shared lastRoundDoubleInfinateLoop As Boolean = False
 End Class

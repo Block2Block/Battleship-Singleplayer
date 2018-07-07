@@ -261,7 +261,7 @@
                             Case "Right"
                                 If gv.lastRoundSpace.Contains("10") Then
                                     gv.lastRoundDirection = "Left"
-                                    gv.lastRoundSpace = gv.lastRoundSpace.ToCharArray()(0) & (Integer.Parse(gv.lastRoundSpace.ToCharArray()(1)) - 1)
+                                    gv.lastRoundSpace = gv.lastRoundSpace.ToCharArray()(0) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)) - 1)
                                     Dim space As String = gv.lastRoundSpace
 
                                     Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
@@ -791,8 +791,23 @@
                                     Dim space As String = gv.lastRoundSpace
 
                                     Console.WriteLine("Selected Space: " & space)
+                                    Dim button As Button
+                                    Try
+                                        button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+                                    Catch ex As Exception
+                                        If gv.lastRoundShipInitialLocation.Contains("10") Then
+                                            gv.lastRoundDirection = "Down"
+                                            gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) - 1) & (Integer.Parse(10))
+                                            space = gv.lastRoundSpace
+                                            button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+                                        Else
+                                            gv.lastRoundDirection = "Up"
+                                            gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) - 1) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)))
+                                            space = gv.lastRoundSpace
+                                            button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
+                                        End If
+                                    End Try
 
-                                    Dim button As Button = DirectCast(My.Forms.Form6.Controls.Find(space & "Player", True)(0), Button)
 
                                     If button.Text = "-" Or button.Text = "" Then
                                         For Each x In gv.shipLocations
@@ -841,6 +856,7 @@
                                         If gv.lastRoundInfinateLoop Then
                                             gv.lastRoundInfinateLoop = False
                                             gv.lastRoundDirection = "Down"
+                                            gv.lastRoundDoubleInfinateLoop = True
                                         End If
                                         AI_Turn()
                                     End If
@@ -970,6 +986,7 @@
                                         gv.lastRoundSpace = letters(Array.IndexOf(letters, gv.lastRoundShipInitialLocation.ToCharArray()(0)) + 1) & (Integer.Parse(gv.lastRoundShipInitialLocation.ToCharArray()(1)))
                                     End If
                                     Dim space As String = gv.lastRoundSpace
+                                    gv.lastRoundInfinateLoopVertical = True
 
                                     Console.WriteLine("Selected Space: " & space)
 
@@ -989,6 +1006,7 @@
                                                     button.Text = "X"
                                                     gv.lastRoundHitsInDirection = True
                                                     Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                    gv.lastRoundInfinateLoopVertical = False
                                                     AI_Turn()
                                                     Exit Sub
                                                 End If
@@ -1007,6 +1025,7 @@
                                                     Exit Sub
                                                 End If
                                                 Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                                gv.lastRoundInfinateLoopVertical = False
                                                 AI_Turn()
                                                 Exit Sub
                                             End If
@@ -1196,6 +1215,13 @@
                                         button.Text = "O"
                                     Else
                                         Console.WriteLine("[Debug] Hit = " & gv.lastRoundHit & ", Sunk = " & gv.lastRoundSunk & ", Space = " & gv.lastRoundSpace & ", FoundShip = " & gv.lastRoundFoundShip & ", ShipInitialLocation = " & gv.lastRoundShipInitialLocation & ", Direction = " & gv.lastRoundDirection & ", HitsInDirection = " & gv.lastRoundHitsInDirection)
+                                        If gv.lastRoundInfinateLoopVertical Then
+                                            gv.lastRoundInfinateLoopVertical = False
+                                            gv.lastRoundDirection = "Left"
+                                            If gv.lastRoundDoubleInfinateLoop Then
+                                                gv.lastRoundFoundShip = False
+                                            End If
+                                        End If
                                         AI_Turn()
                                     End If
                                 Else
