@@ -17,4 +17,6 @@
     Public Shared lastRoundInfinateLoop As Boolean = False
     Public Shared lastRoundInfinateLoopVertical As Boolean = False
     Public Shared lastRoundDoubleInfinateLoop As Boolean = False
+
+    Public Shared username As String = ""
 End Class

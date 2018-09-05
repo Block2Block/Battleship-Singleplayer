@@ -71,3 +71,9 @@ D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\o
 D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.Form5.resources
 D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.Form6.resources
 D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.vbproj.CoreCompileInputs.cache
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.Form7.resources
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.UserControl1.resources
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.UserControl2.resources
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Interop.ADOX.dll
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship Singleplayer.vbproj.ResolveComReference.cache
+D:\College Work\Computer Science\Battleship Multiplayer\Battleship Multiplayer\obj\Debug\Battleship_Singleplayer.Form8.resources

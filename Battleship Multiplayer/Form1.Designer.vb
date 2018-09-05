@@ -26,6 +26,11 @@ Partial Class Form1
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.w = New System.Windows.Forms.Label()
+        Me.gp = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -64,13 +69,63 @@ Partial Class Form1
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "AI Level: Normal"
         '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(105, 255)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 23)
+        Me.Button3.TabIndex = 1
+        Me.Button3.Text = "Login"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(29, 194)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(78, 13)
+        Me.Label3.TabIndex = 4
+        Me.Label3.Text = "Games Played:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(206, 194)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(34, 13)
+        Me.Label4.TabIndex = 4
+        Me.Label4.Text = "Wins:"
+        '
+        'w
+        '
+        Me.w.AutoSize = True
+        Me.w.Location = New System.Drawing.Point(188, 207)
+        Me.w.Name = "w"
+        Me.w.Size = New System.Drawing.Size(84, 13)
+        Me.w.TabIndex = 5
+        Me.w.Text = "Login to see this"
+        '
+        'gp
+        '
+        Me.gp.AutoSize = True
+        Me.gp.Location = New System.Drawing.Point(23, 207)
+        Me.gp.Name = "gp"
+        Me.gp.Size = New System.Drawing.Size(84, 13)
+        Me.gp.TabIndex = 5
+        Me.gp.Text = "Login to see this"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.ClientSize = New System.Drawing.Size(284, 316)
+        Me.Controls.Add(Me.gp)
+        Me.Controls.Add(Me.w)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Name = "Form1"
@@ -84,4 +139,9 @@ Partial Class Form1
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Label2 As Label
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents w As Label
+    Friend WithEvents gp As Label
 End Class
